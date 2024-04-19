@@ -1,0 +1,31 @@
+def caesar_cipher(message, key, operation):
+    result = ""
+    key = key % 26  # Ensure key is within the range [0, 25]
+
+    for char in message:
+        if char.isalpha():
+            if char.islower():
+                result += chr((ord(char) - ord('a') + key) % 26 + ord('a'))
+            elif char.isupper():
+                result += chr((ord(char) - ord('A') + key) % 26 + ord('A'))
+        else:
+            result += char
+
+    return result
+
+def main():
+    message = input("Enter the message to encrypt/decrypt: ")
+    key = int(input("Enter the key (shift value): "))
+    operation = input("Choose operation (encrypt or decrypt): ").lower()
+
+    if operation == "encrypt":
+        encrypted_message = caesar_cipher(message, key, "encrypt")
+        print("Encrypted message:", encrypted_message)
+    elif operation == "decrypt":
+        decrypted_message = caesar_cipher(message, key, "decrypt")
+        print("Decrypted message:", decrypted_message)
+    else:
+        print("Invalid operation. Please choose 'encrypt' or 'decrypt'.")
+
+if _name_ == "_main_":
+    main()
